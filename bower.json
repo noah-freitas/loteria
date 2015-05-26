@@ -1,0 +1,20 @@
+{
+  "name": "loteria",
+  "version": "0.0.0",
+  "homepage": "https://github.com/noah-freitas/loteria",
+  "authors": [
+    "Noah Freitas <noah.j.freitas@gmail.com>"
+  ],
+  "main": "index.html",
+  "license": "MIT",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components",
+    "test",
+    "tests"
+  ],
+  "dependencies": {
+    "es6-shim": "~0.31.2"
+  }
+}
