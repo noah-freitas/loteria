@@ -12,10 +12,13 @@
 
     // checkCard :: { card :: Card, selected :: Boolean } -> { card :: Card, selected :: Boolean }
     function checkCard(cardAndSelected) {
+        // We only need to check the cards that claim to have been played.  We pass
+        // through the others.
         return cardAndSelected.selected ? checkPlayed() : cardAndSelected;
 
         // checkPlayed :: undefined -> { card :: Card, selected :: Boolean }
         function checkPlayed() {
+            // The card should be selected if it's in the discard pile.
             cardAndSelected.selected = Boolean(discard.find(function (c) { return c.title === cardAndSelected.card.title; }));
             return cardAndSelected;
         }
@@ -58,9 +61,12 @@
 
     // startGame :: undefined -> undefined
     function startGame() {
+        discard = [];
+
         getCards().then(shuffleCards)
                   .then(startGameInterval);
 
+        // startGameInterval :: undefined -> undefined
         function startGameInterval() {
             drawCard();
             gameInterval = setInterval(drawCard, 3000);
@@ -73,23 +79,23 @@
         gameInterval = null;
     }
 
-    // shuffle :: [a] -> [a]
-    function shuffle(a) {
-        var choice,
-            choices  = a.slice(0),
-            shuffled = [];
-
-        while (choices.length > 0) {
-            choice = choices.splice(Math.ceil(Math.random() * choices.length) - 1, 1)[0];
-            shuffled.push(choice);
-        }
-
-        return shuffled;
-    }
-
     // shuffleCards :: undefined -> undefined
     function shuffleCards() {
-        draw    = shuffle(cards);
-        discard = [];
+        draw = shuffle(cards);
+
+        // shuffle :: [a] -> [a]
+        function shuffle(a) {
+            var choice,
+                choices  = a.slice(0),
+                shuffled = [];
+
+            // While there are choices, choose and remove a random element from the array.
+            while (choices.length > 0) {
+                choice = choices.splice(Math.ceil(Math.random() * choices.length) - 1, 1)[0];
+                shuffled.push(choice);
+            }
+
+            return shuffled;
+        }
     }
 }());
