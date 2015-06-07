@@ -4,11 +4,23 @@
         <meta charset="utf-8">
         <title>Loteria Tabla</title>
         <style>
+            body {
+                margin  : 0;
+                padding : 0;
+            }
+            body > header {
+                font-size : 2.5vh;
+                height    : 12vh;
+                overflow  : hidden;
+            }
             body > header * {
                 display : inline-block;
             }
-            body > header p {
+            body > header p, body > header button {
                 float : right;
+            }
+            body > header button#loteria {
+                display : none;
             }
             section#board {
                 display : none;
@@ -16,22 +28,33 @@
             }
             section#board article {
                 float    : left;
-                margin   : 10px;
+                margin   : 1vh 10px;
                 position : relative;
                 width    : 180px;
             }
             section#board article h1 {
                 bottom    : 20%;
+                display   : none;
                 font-size : 3vh;
                 position  : absolute;
                 text-align: center;
                 width     : 180px;
             }
             section#board article img {
+                cursor     : pointer;
                 display    : block;
                 margin     : 0 auto;
                 max-height : 20vh;
                 max-width  : 100%;
+                opacity    : 0.9;
+            }
+            section#board article img.selected {
+                box-shadow : 0 0 1em 0.3em red;
+                opacity    : 1.0;
+                outline    : 2px solid red;
+            }
+            section#card {
+                display : none;
             }
         </style>
     </head>
@@ -39,6 +62,7 @@
         <header>
             <h1>Loteria Tabla</h1>
             <p>User: <span class="user-name"></span></p>
+            <button id="loteria">Loteria!</button>
         </header>
         <section id="login">
             <form>
@@ -115,5 +139,14 @@
                 <h1>Card 16</h1>
             </article>
         </section>
+        <section id="card">
+            <img src="">
+        </section>
+        <script src="/bower_components/es6-shim/es6-shim.min.js"></script>
+        <script src="/js/dom.js"></script>
+        <script src="/js/loteria.js"></script>
+        <script src="/js/login.js"></script>
+        <script src="/js/tabla.js"></script>
+        <script src="/js/tabla-client.js"></script>
     </body>
 </html>

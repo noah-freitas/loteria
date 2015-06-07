@@ -1,6 +1,9 @@
 ;(function () {
     'use strict';
 
+    window.getTabla   = getTabla;
+    window.scoreTabla = scoreTabla;
+
     // Tabla :: [Card]
     // A tabla is an array of 16 cards, displayed as a 4 x 4 grid.
     //
@@ -25,8 +28,13 @@
         }
     }
 
+    // getTabla :: undefined -> Promise<Tabla, Error>
+    function getTabla() {
+        return loteria.getCards().then(generateTabla);
+    }
+
     // printTabla :: Tabla -> undefined
-    // Prints a tabla to the console.
+    // Prints a tabla to the console.1
     function printTabla(tabla) {
         array(4).forEach(function (_, i) {
             console.log(tabla.slice(i * 4, i * 4 + 4));
